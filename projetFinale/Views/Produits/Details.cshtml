@@ -1,0 +1,58 @@
+﻿@model projetFinale.Models.Produits
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4 class="text-center display-5"> Detais du Produit:</h4>
+    <hr />
+    <div class="d-lg-flex d-md-flex d-block justify-content-around form-control">
+        <dl class="row ">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Marque)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Marque)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Capacite)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Capacite)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Utilisation)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Utilisation)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Fonctionnalite)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Fonctionnalite)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Prix)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Prix)
+            </dd>
+            
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CategorieId)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.CategorieId)
+            </dd>
+        </dl>
+        <div>
+            <img style="width:200px; height:200px;" src="~/images/@Model.Image" />
+        </div>
+   </div>
+</div>
+<div class="my-3">
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Modifier</a> |
+    <a asp-action="Index" class="">Back to List</a>
+</div>

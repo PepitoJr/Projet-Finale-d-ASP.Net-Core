@@ -1,0 +1,40 @@
+﻿@model IEnumerable<projetFinale.Models.Produits>
+
+@{
+    ViewData["Title"] = "BoutiqueA";
+}
+<link rel="stylesheet" href="~/css/style.css">
+<h1 class="text-center display-4 my-5" style="font-weight:600;">Mokolo</h1>
+<div class="row mb-5">
+    <div class="col-md-9 p-2">
+        <form asp-action="BoutiqueA" asp-controller"Produits" class="d-flex">
+            <input style="font-weight:600;" type="search" name="searchString" class="form-control" me-1 placeholder="recherche" aria-label="searh" />
+            <button class="btn btn-dark ms-2" style="font-weight:600;" type="submit">recherche</button>
+        </form>
+    </div>
+    <div class="col-md-3 d-flex ">
+        <a asp-action="BoutiqueA" style="font-weight:600;" class="text-dark align-self-center">retour a la liste</a>
+    </div>
+</div>
+<div class=" ">
+    @foreach (var item in Model)
+    {
+        <div class="card  d-inline-block m-1 " style="max-width:320px;max-height:900px;">
+            
+            <div class="card-body  p-0">
+                <a asp-action="DetailItem" asp-route-id="@item.Id">
+                    <img style="width:315px; height:315px;" class="align-content-center card-img" src="~/images/@item.Image">
+                </a>
+                <details style="font-weight:600; font-size:16px;">
+                    <summary>Infos</summary>
+                    <p>Marque : @item.Marque</p>
+                    <p>Utilisation : @item.Utilisation</p>
+                    <p>Capacité : @item.Capacite</p>
+                    <p>Fonctionnalité : @item.Fonctionnalite</p>
+                    <p>Catégorie ID : @item.CategorieId</p>
+                </details>
+                <p style="font-weight:600; font-size:20px; text-decoration:underline;">@Html.DisplayFor(modelItem => item.Prix)</p>
+            </div>
+        </div>
+    }
+</div>

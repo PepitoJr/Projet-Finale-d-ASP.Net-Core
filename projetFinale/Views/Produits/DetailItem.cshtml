@@ -1,0 +1,71 @@
+﻿@model projetFinale.Models.Produits
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div style="font-size:30px;" >
+    <h4 class="text-center display-5"> Details du Produit:</h4>
+    <hr />
+    <div class="d-lg-flex d-md-flex d-block justify-content-around form-control  p-3">
+        <dl class="row">
+            <dt class="col-sm-4 h4">
+                @Html.DisplayNameFor(model => model.Marque)
+            </dt>
+            <dd class="col-sm-8 h5 ">
+                @Html.DisplayFor(model => model.Marque)
+            </dd>
+            <dt class="col-sm-4 h4">
+                @Html.DisplayNameFor(model => model.Capacite)
+            </dt>
+            <dd class="col-sm-8 h5">
+                @Html.DisplayFor(model => model.Capacite)
+            </dd>
+            <dt class="col-sm-4 h4">
+                @Html.DisplayNameFor(model => model.Utilisation)
+            </dt>
+            <dd class="col-sm-8 h5">
+                @Html.DisplayFor(model => model.Utilisation)
+            </dd>
+            <dt class="col-sm-4 h4">
+                @Html.DisplayNameFor(model => model.Fonctionnalite)
+            </dt>
+            <dd class="col-sm-8 h5">
+                @Html.DisplayFor(model => model.Fonctionnalite)
+            </dd>
+            <dt class="col-sm-4 h4">
+                @Html.DisplayNameFor(model => model.Prix)
+            </dt>
+            <dd class="col-sm-8 h5">
+                @Html.DisplayFor(model => model.Prix)
+            </dd>
+            <dt class="col-sm-4 h4">
+                @Html.DisplayNameFor(model => model.CategorieId)
+            </dt>
+            <dd class="col-sm-8 h5">
+                @Html.DisplayFor(model => model.CategorieId)
+            </dd>
+        </dl>
+        <div>
+            <img style="width:200px; height:200px;" src="~/images/@Model.Image" />
+        </div>
+   </div>
+ 
+
+</div>
+<form asp-action="AddTocart" class="my-5 h5" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <label class="h5 me-3"> Quantite:</label>
+    <select name="quantite" class="rounded h5">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <input type="submit" name="send" class="btn btn-primary" value="Ajouter" />
+</form>
+<div class="my-4">
+    <a asp-action="BoutiqueA" class=" btn btn-dark mx-auto">Back to List</a>
+</div>

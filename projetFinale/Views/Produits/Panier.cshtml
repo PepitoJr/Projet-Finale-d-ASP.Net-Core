@@ -1,0 +1,63 @@
+﻿@model IEnumerable<projetFinale.Models.Chariot>
+
+<h1 class="text-center my-5">Mon Panier</h1>
+<table class="table table-bordered table-hover h5 table-responsive rounded-1 bg-success bg-opacity-10"> 
+    <thead> 
+        <tr> 
+            <th>Produit</th>
+            <th>Quantité</th> 
+            <th>Prix</th> 
+            <th>Total</th> 
+        </tr>
+    </thead>
+    <tbody> 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="h4">@item.Produit.Marque</td> 
+                <td class="h4">@item.Quantite</td> 
+                <td class="h4">@item.Produit.Prix</td> 
+                <td class="h4">@(item.Quantite * item.Produit.Prix)</td> 
+            </tr>
+        }
+        </tbody> 
+        <tfoot> 
+            <tr> 
+                <td colspan="3">Total Général</td> 
+                <td style="text-decoration:underline">@Model.Sum(item => item.Quantite * item.Produit.Prix) $</td> 
+            </tr>
+            </tfoot>
+    </tfoot>
+</table>
+<div class="d-flex justify-content-around m-5">
+    <a asp-action="ViderPanier" asp-controller="Produits" class="btn btn-danger mx-auto">Vider le panier</a>
+    <a asp-action="BoutiqueA" asp-controller="Produits" class="btn btn-primary mx-auto">Continuer vos achats</a>
+</div>
+<div id="paypal-button-container" class="d-flex justify-content-center justify-content-md-center   justify-content-lg-center"></div>
+ 
+<script src="https://sandbox.paypal.com/sdk/js?client-id=AU_35IcZQOrUxDG7Wk4dPNQX1yHveKE20i2Ch3xVJxtzQpOPzZdYT9VcdnBlGSoctbHB1z9K9UyA025s"></script>
+<script>
+    paypal.Buttons({
+        createOrder:function(date,actions)
+        {
+            return actions.order.create({
+                purchase_units:[{
+                    amount:{
+                        value:"@Model.Sum(item => item.Quantite * item.Produit.Prix)"
+                    }
+                }]
+            });
+        },
+        onApprouve:function(data,actions){
+            return actions.order.capture().then(function(details){
+                alert("transaction completee par "+details.payer.name_given+" !")
+            })
+        },
+        onError:function(err){
+            console.log("Erreur dans la payment",err);
+            alert("Payement echoue!");
+        }
+    }).render("#paypal-button-container").then(function(){
+
+    })
+</script>
